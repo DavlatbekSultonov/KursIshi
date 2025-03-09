@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: mtd_teacher_service
+    env: docker
+    region: frankfurt
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /
+
