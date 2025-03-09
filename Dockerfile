@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # 10. Port ochish (8080)
-EXPOSE 8080
+EXPOSE 8282
 
 # 11. Ilovani ishga tushirish
 ENTRYPOINT ["java", "-jar", "app.jar"]

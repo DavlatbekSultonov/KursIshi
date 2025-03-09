@@ -28,9 +28,7 @@ hs_err_pid*
 
 # Environment settings
 .env
-application.properties
-application.yml
-application.properties.example
+application.properties.example  # Faqat namuna faylni ignore qilamiz
 
 # OS-specific files
 .DS_Store
