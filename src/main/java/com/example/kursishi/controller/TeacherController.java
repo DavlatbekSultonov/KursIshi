@@ -21,7 +21,7 @@ public class TeacherController {
      * @param teacherReqDto - O‘qituvchi ma’lumotlari
      * @return ApiResponse - Yangi o‘qituvchi
      */
-//    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<ApiResponse> createTeacher(@RequestBody TeacherReqDto teacherReqDto) {
         ApiResponse response = teacherService.create(teacherReqDto);
@@ -34,8 +34,9 @@ public class TeacherController {
      * @param teacherReqDto - Yangilanishi kerak bo‘lgan ma’lumotlar
      * @return ApiResponse - Yangilangan o‘qituvchi
      */
+
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ApiResponse> updateTeacher(@PathVariable Long id, @RequestBody TeacherReqDto teacherReqDto) {
         ApiResponse response = teacherService.update(id, teacherReqDto);
         return ResponseEntity.ok(response);
@@ -68,7 +69,7 @@ public class TeacherController {
      * @return ApiResponse - O‘chirilgan o‘qituvchi
      */
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<ApiResponse> deleteTeacher(@PathVariable Long id) {
         ApiResponse response = teacherService.delete(id);
         return ResponseEntity.ok(response);

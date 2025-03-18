@@ -21,8 +21,7 @@ public class PartnersMapper {
         partners.setNomi(partnersReqDto.name());
         partners.setDescription(partnersReqDto.description());
 
-        Attachment attachment = attachmentRepository.findById(partnersReqDto.imageId()).orElseThrow(() -> new EntityNotFoundException("Partner image not found"));
-        partners.setImage(attachment);
+        partners.setImageUrl(partnersReqDto.imageUrl());
 
     }
 
@@ -33,7 +32,7 @@ public class PartnersMapper {
                         partners.getId(),
                         partners.getNomi(),
                         partners.getDescription(),
-                        partners.getImage().getFileName().toString()
+                        partners.getImageUrl()
                 );
     }
 }

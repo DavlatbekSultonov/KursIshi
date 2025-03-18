@@ -23,6 +23,8 @@ public class DataLoader implements CommandLineRunner{
     public void run(String... args) throws Exception {
         if (userRepository.findByUsername("admin").isEmpty()) {
             User admin = User.builder()
+                    .name("Dilshod")
+                    .surname("Samadov")
                     .role(Role.ADMIN)
                     .username("admin")
                     .password(passwordEncoder.encode("admin123")) // Parol shifrlanadi

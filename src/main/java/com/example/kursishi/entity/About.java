@@ -25,10 +25,12 @@ public class About {
 
     private String phoneNumber;
 
-//    @OneToOne(cascade = CascadeType.ALL)
     private String imageUrl;
 
     private String telegram;
+    private String instagram;
+    private String youtube;
+
 
 
 }

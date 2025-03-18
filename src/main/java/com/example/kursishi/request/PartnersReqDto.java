@@ -4,6 +4,6 @@ public record PartnersReqDto
         (
                 String name,
                 String description,
-                Long imageId
+                String imageUrl
         ) {
 }

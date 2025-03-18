@@ -21,6 +21,5 @@ public class Partners {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Attachment image;
+    private String imageUrl;
 }

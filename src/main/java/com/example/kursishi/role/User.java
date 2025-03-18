@@ -17,6 +17,10 @@ public class User {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    private String name;
+    @Column(unique = true, nullable = false)
+    private String surname;
+    @Column(unique = true, nullable = false)
     private String username;
 
     @Column(nullable = false)
