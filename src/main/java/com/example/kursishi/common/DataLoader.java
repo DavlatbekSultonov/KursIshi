@@ -2,9 +2,13 @@ package com.example.kursishi.common;
 
 import com.example.kursishi.entity.About;
 import com.example.kursishi.repository.AboutRepository;
+import com.example.kursishi.repository.RoleRepository;
+import com.example.kursishi.repository.UserDetailRepository;
 import com.example.kursishi.repository.UserRepository;
+import com.example.kursishi.role.RolName;
 import com.example.kursishi.role.Role;
 import com.example.kursishi.role.User;
+import com.example.kursishi.role.UserDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,22 +22,33 @@ public class DataLoader implements CommandLineRunner{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final AboutRepository aboutRepository;
+    private final UserDetailRepository userDetailRepository;
+    private final RoleRepository roleRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        if (userRepository.findByUsername("admin").isEmpty()) {
-            User admin = User.builder()
-                    .name("Dilshod")
-                    .surname("Samadov")
-                    .role(Role.ADMIN)
-                    .username("admin")
-                    .password(passwordEncoder.encode("admin123")) // Parol shifrlanadi
-                    .build();
-            userRepository.save(admin);
-            System.out.println("Admin yaratildi:");
-        } else {
-            System.out.println("Admin allaqachon mavjud.");
-        }
+        UserDetail userDetail = new UserDetail();
+
+        userDetail.setName("Super admin");
+        userDetail.setPhoneNumber("+998881020023");
+        userDetailRepository.save(userDetail);
+
+        Role superAdmin = new Role();
+        superAdmin.setName(RolName.ADMIN);
+        roleRepository.save(superAdmin);
+
+        Role userRole = new Role();
+        userRole.setName(RolName.USER);
+        roleRepository.save(userRole);
+
+
+        User user = new User();
+        user.setUserDetail(userDetail);
+        user.setUserRole(superAdmin);
+        user.setEnabled(true);
+        user.setPassword(passwordEncoder.encode("1406"));
+        userRepository.save(user);
+
 
         About about = new About();
          about.setName("TATU Multimedia Kafedrasi");

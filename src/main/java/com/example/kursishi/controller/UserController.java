@@ -1,54 +1,66 @@
 package com.example.kursishi.controller;
 
 import com.example.kursishi.common.ApiResponse;
-import com.example.kursishi.repository.UserRepository;
-import com.example.kursishi.request.SignInDto;
-import com.example.kursishi.request.TeacherReqDto;
-import com.example.kursishi.request.UserDto;
-import com.example.kursishi.role.User;
+import com.example.kursishi.common.CheckRole;
+import com.example.kursishi.common.RestConstant;
+import com.example.kursishi.request.UserDtoReq;
+import com.example.kursishi.role.RolName;
 import com.example.kursishi.service.UserService;
-import jakarta.persistence.EntityNotFoundException;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.groups.Default;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping()
 public class UserController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/create")
-    public ApiResponse create(@RequestBody UserDto userDto){
-        User user = new User();
-        ApiResponse apiResponse = userService.create(userDto, user);
 
-        return ApiResponse.builder().data(apiResponse).message("sign in succesfully").build();
+    @Tag(name = "Creating user ", description = "It is accessible for super admin and admin")
+    @CheckRole({RolName.ADMIN})
+    @PostMapping(RestConstant.BASE_SECURE_PATH + "user/")
+    public HttpEntity<?> create(@RequestBody UserDtoReq userDtoReq) {
+        ApiResponse apiResponse = userService.create(userDtoReq);
+        return ResponseEntity.ok(apiResponse);
+    }
+
+    @Tag(name = "Get single user to show users ", description = "It is accessible for all users")
+    @GetMapping(RestConstant.BASE_OPEN_APIS + "user/{id}")
+    public HttpEntity<?> getSingle(@PathVariable Long id) {
+        ApiResponse apiResponse = userService.getSingle(id);
+        return ResponseEntity.ok(apiResponse);
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("/update")
-    public ApiResponse update(@PathVariable Long id, @RequestBody UserDto userDto){
-        User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
-        ApiResponse apiResponse = userService.create(userDto, user);
-        return ApiResponse.builder().data(apiResponse).build();
-
-    }
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found"));
-        userRepository.delete(user);
+    @Tag(name = "Updating user details ", description = "It is accessible for only super admin and admin")
+    @CheckRole({RolName.ADMIN})
+    @PutMapping(RestConstant.BASE_SECURE_PATH + "user/update/{id}")
+    public HttpEntity<?> update(@PathVariable Long id,@RequestBody UserDtoReq userDtoReq) {
+        ApiResponse apiResponse = userService.update(userDtoReq, id);
+        return ResponseEntity.ok(apiResponse);
     }
 
-    @PostMapping("/sign-in")
-    public ApiResponse signIn(@RequestBody SignInDto signInDto){
-        ApiResponse apiResponse = userService.signIn(signInDto);
-        return ApiResponse.builder().data(apiResponse).build();
+    @Tag(name = "deleting user", description = "It is accessible for super admin and admin")
+    @CheckRole({RolName.ADMIN, RolName.SUPER_ADMIN})
+    @DeleteMapping(RestConstant.BASE_SECURE_PATH + "user/delete/{id}")
+    public HttpEntity<?> delete(@PathVariable Long id) {
+        ApiResponse apiResponse = userService.delete(id);
+        return ResponseEntity.ok(apiResponse);
     }
+
+    @Tag(name = "Get all users", description = "It is accessible for super admin and admin")
+    @CheckRole({RolName.ADMIN, RolName.SUPER_ADMIN})
+    @GetMapping(RestConstant.BASE_SECURE_PATH + "user/all")
+    public HttpEntity<?> getAll() {
+        ApiResponse apiResponse = userService.getAll();
+        return ResponseEntity.ok(apiResponse);
+    }
+
+
 
 }

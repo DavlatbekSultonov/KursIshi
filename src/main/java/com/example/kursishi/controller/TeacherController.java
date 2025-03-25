@@ -2,7 +2,10 @@ package com.example.kursishi.controller;
 
 
 import com.example.kursishi.common.ApiResponse;
+import com.example.kursishi.common.CheckRole;
+import com.example.kursishi.common.RestConstant;
 import com.example.kursishi.request.TeacherReqDto;
+import com.example.kursishi.role.RolName;
 import com.example.kursishi.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/teachers")
+@RequestMapping()
 public class TeacherController {
 
     private final TeacherService teacherService;
@@ -21,8 +24,8 @@ public class TeacherController {
      * @param teacherReqDto - O‘qituvchi ma’lumotlari
      * @return ApiResponse - Yangi o‘qituvchi
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/create")
+    @CheckRole({RolName.ADMIN})
+    @PostMapping(RestConstant.BASE_SECURE_PATH + "create/Teacher")
     public ResponseEntity<ApiResponse> createTeacher(@RequestBody TeacherReqDto teacherReqDto) {
         ApiResponse response = teacherService.create(teacherReqDto);
         return ResponseEntity.ok(response);
@@ -35,8 +38,8 @@ public class TeacherController {
      * @return ApiResponse - Yangilangan o‘qituvchi
      */
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @PutMapping("/update/{id}")
+    @CheckRole({RolName.ADMIN})
+    @PostMapping(RestConstant.BASE_SECURE_PATH + "/update/Teacher/{id}")
     public ResponseEntity<ApiResponse> updateTeacher(@PathVariable Long id, @RequestBody TeacherReqDto teacherReqDto) {
         ApiResponse response = teacherService.update(id, teacherReqDto);
         return ResponseEntity.ok(response);
@@ -47,7 +50,7 @@ public class TeacherController {
      * @param id - O‘qituvchining ID'si
      * @return ApiResponse - O‘qituvchi ma’lumotlari
      */
-    @GetMapping("/{id}")
+    @GetMapping(RestConstant.BASE_OPEN_APIS+"/{id}")
     public ResponseEntity<ApiResponse> getTeacherById(@PathVariable Long id) {
         ApiResponse response = teacherService.getId(id);
         return ResponseEntity.ok(response);
@@ -57,7 +60,7 @@ public class TeacherController {
      * Barcha o‘qituvchilarni olish
      * @return ApiResponse - O‘qituvchilar ro‘yxati
      */
-    @GetMapping
+    @GetMapping(RestConstant.BASE_OPEN_APIS)
     public ResponseEntity<ApiResponse> getAllTeachers() {
         ApiResponse response = teacherService.getAll();
         return ResponseEntity.ok(response);
@@ -68,8 +71,9 @@ public class TeacherController {
      * @param id - O‘qituvchining ID'si
      * @return ApiResponse - O‘chirilgan o‘qituvchi
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @DeleteMapping("/delete/{id}")
+
+    @CheckRole(RolName.ADMIN)
+    @DeleteMapping(RestConstant.BASE_SECURE_PATH+"/delete/Teacher/{id}")
     public ResponseEntity<ApiResponse> deleteTeacher(@PathVariable Long id) {
         ApiResponse response = teacherService.delete(id);
         return ResponseEntity.ok(response);
