@@ -29,13 +29,13 @@ public class DataLoader implements CommandLineRunner{
     public void run(String... args) throws Exception {
         UserDetail userDetail = new UserDetail();
 
-        userDetail.setName("Super admin");
+        userDetail.setName("Admin");
         userDetail.setPhoneNumber("+998881020023");
         userDetailRepository.save(userDetail);
 
-        Role superAdmin = new Role();
-        superAdmin.setName(RolName.ADMIN);
-        roleRepository.save(superAdmin);
+        Role Admin = new Role();
+        Admin.setName(RolName.ADMIN);
+        roleRepository.save(Admin);
 
         Role userRole = new Role();
         userRole.setName(RolName.USER);
@@ -44,7 +44,7 @@ public class DataLoader implements CommandLineRunner{
 
         User user = new User();
         user.setUserDetail(userDetail);
-        user.setUserRole(superAdmin);
+        user.setUserRole(Admin);
         user.setEnabled(true);
         user.setPassword(passwordEncoder.encode("1406"));
         userRepository.save(user);

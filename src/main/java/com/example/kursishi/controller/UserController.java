@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @Tag(name = "deleting user", description = "It is accessible for super admin and admin")
-    @CheckRole({RolName.ADMIN, RolName.SUPER_ADMIN})
+    @CheckRole({RolName.ADMIN})
     @DeleteMapping(RestConstant.BASE_SECURE_PATH + "user/delete/{id}")
     public HttpEntity<?> delete(@PathVariable Long id) {
         ApiResponse apiResponse = userService.delete(id);
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @Tag(name = "Get all users", description = "It is accessible for super admin and admin")
-    @CheckRole({RolName.ADMIN, RolName.SUPER_ADMIN})
+    @CheckRole({RolName.ADMIN})
     @GetMapping(RestConstant.BASE_SECURE_PATH + "user/all")
     public HttpEntity<?> getAll() {
         ApiResponse apiResponse = userService.getAll();

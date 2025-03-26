@@ -39,7 +39,7 @@ public class TeacherController {
      */
 
     @CheckRole({RolName.ADMIN})
-    @PostMapping(RestConstant.BASE_SECURE_PATH + "/update/Teacher/{id}")
+    @PostMapping(RestConstant.BASE_SECURE_PATH + "update/Teacher/{id}")
     public ResponseEntity<ApiResponse> updateTeacher(@PathVariable Long id, @RequestBody TeacherReqDto teacherReqDto) {
         ApiResponse response = teacherService.update(id, teacherReqDto);
         return ResponseEntity.ok(response);
@@ -50,7 +50,7 @@ public class TeacherController {
      * @param id - O‘qituvchining ID'si
      * @return ApiResponse - O‘qituvchi ma’lumotlari
      */
-    @GetMapping(RestConstant.BASE_OPEN_APIS+"/{id}")
+    @GetMapping(RestConstant.BASE_OPEN_APIS+"{id}")
     public ResponseEntity<ApiResponse> getTeacherById(@PathVariable Long id) {
         ApiResponse response = teacherService.getId(id);
         return ResponseEntity.ok(response);
@@ -72,8 +72,8 @@ public class TeacherController {
      * @return ApiResponse - O‘chirilgan o‘qituvchi
      */
 
-    @CheckRole(RolName.ADMIN)
-    @DeleteMapping(RestConstant.BASE_SECURE_PATH+"/delete/Teacher/{id}")
+    @CheckRole({RolName.ADMIN})
+    @DeleteMapping(RestConstant.BASE_SECURE_PATH+"delete/Teacher/{id}")
     public ResponseEntity<ApiResponse> deleteTeacher(@PathVariable Long id) {
         ApiResponse response = teacherService.delete(id);
         return ResponseEntity.ok(response);
