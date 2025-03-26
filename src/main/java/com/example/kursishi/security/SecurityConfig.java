@@ -34,7 +34,7 @@ public class SecurityConfig {
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
                                 "api/auth/sign-in",
-                                "api/auth/**",
+                                        RestConstant.AUTH_API + "/**",
                                         RestConstant.BASE_OPEN_APIS + "**"
                               ).permitAll()
                         .anyRequest().authenticated()
