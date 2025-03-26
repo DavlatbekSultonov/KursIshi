@@ -26,8 +26,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
     private final JWTProvider jwtProvider;
 
-    @Qualifier("userDetailsService")
-    private final UserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
 
 
 //
