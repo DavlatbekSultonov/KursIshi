@@ -17,10 +17,10 @@ import java.util.function.Function;
 public class JWTProvider {
 
 
-    @Value("${MTD.config.jwt.secret-key}")
+    @Value("${kursishi.config.jwt.secret-key}")
     private String SECRET_KEY;
 
-    @Value("${MTD.config.jwt.expiration}")
+    @Value("${kursishi.config.jwt.expiration}")
     private Long EXPIRATION;
 
     public String generateAccessToken(UserDetails userDetails) {
