@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Hamkorlar boshqaruvi->", description = "(Hamkorlarni yaratish, yangilash, ko‘rish va o‘chirish API-lari)")
 public class PartnerController {
     private final PartnersService partnersService;
-
+//
     @CheckRole({RolName.ADMIN})
     @PostMapping(RestConstant.BASE_SECURE_PATH+"create/partner")
     @Operation(summary = "Yangi hamkor yaratish->", description = "(Bu API faqat administrator tomonidan ishlatilishi mumkin.)")

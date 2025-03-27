@@ -23,7 +23,7 @@ public class TeacherController {
     private final TeacherService teacherService;
 
     /**
-     * O‘qituvchi yaratish
+     * O‘qituvchi yaratish .
      * @param teacherReqDto - O‘qituvchi ma’lumotlari
      * @return ApiResponse - Yangi o‘qituvchi
      */

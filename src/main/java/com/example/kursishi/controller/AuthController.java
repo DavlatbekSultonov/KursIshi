@@ -24,7 +24,7 @@ public class AuthController {
      * This API is designed for authorizing User
      *
      * @param authRequest has 2 variable:
-     *                    1-phoneNumber -> should be String
+     *       .             1-phoneNumber -> should be String
      *                    2-password -> should be String
      * @return
      */

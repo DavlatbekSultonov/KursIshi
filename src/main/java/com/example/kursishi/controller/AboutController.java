@@ -32,7 +32,7 @@ public class AboutController {
         return ResponseEntity.ok(response);
     }
 
-    // UPDATE
+    //  UPDATE
 
     @CheckRole(RolName.ADMIN)
     @PutMapping(RestConstant.BASE_SECURE_PATH+"update/About/{id}")
