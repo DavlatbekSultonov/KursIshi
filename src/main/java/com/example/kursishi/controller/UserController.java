@@ -21,41 +21,40 @@ public class UserController {
 
     private final UserService userService;
 
-    @Tag(name = "Creating user ", description = "It is accessible for super admin and admin")
+    @Tag(name = "Creating user -> ", description = "(It is accessible for admin)")
     @CheckRole({RolName.ADMIN})
-    @PostMapping(RestConstant.BASE_SECURE_PATH + "user/")
+    @PostMapping(RestConstant.BASE_SECURE_PATH + "user/create")
     public HttpEntity<?> create(@RequestBody UserDtoReq userDtoReq) {
         ApiResponse apiResponse = userService.create(userDtoReq);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @Tag(name = "Get single user to show users ", description = "It is accessible for all users")
-    @GetMapping(RestConstant.BASE_OPEN_APIS + "user/{id}")
-    public HttpEntity<?> getSingle(@PathVariable Long id) {
+    @Tag(name = "Get single user to show users -> ", description = "(It is accessible for all users)")
+    @GetMapping(RestConstant.BASE_OPEN_APIS + "user/get/{id}")
+    public HttpEntity<?> getSingle(@PathVariable("id") Long id) {
         ApiResponse apiResponse = userService.getSingle(id);
         return ResponseEntity.ok(apiResponse);
     }
 
 
-    @Tag(name = "Updating user details ", description = "It is accessible for only super admin and admin")
+    @Tag(name = "Updating user details -> ", description = "(It is accessible for admin)")
     @CheckRole({RolName.ADMIN})
     @PutMapping(RestConstant.BASE_SECURE_PATH + "user/update/{id}")
-    public HttpEntity<?> update(@PathVariable Long id,@RequestBody UserDtoReq userDtoReq) {
+    public HttpEntity<?> update(@PathVariable("id") Long id,@RequestBody UserDtoReq userDtoReq) {
         ApiResponse apiResponse = userService.update(userDtoReq, id);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @Tag(name = "deleting user", description = "It is accessible for super admin and admin")
+    @Tag(name = "deleting user -> ", description = "(It is accessible for admin)")
     @CheckRole({RolName.ADMIN})
     @DeleteMapping(RestConstant.BASE_SECURE_PATH + "user/delete/{id}")
-    public HttpEntity<?> delete(@PathVariable Long id) {
+    public HttpEntity<?> delete(@PathVariable("id") Long id) {
         ApiResponse apiResponse = userService.delete(id);
         return ResponseEntity.ok(apiResponse);
     }
 
-    @Tag(name = "Get all users", description = "It is accessible for super admin and admin")
-    @CheckRole({RolName.ADMIN})
-    @GetMapping(RestConstant.BASE_SECURE_PATH + "user/all")
+    @Tag(name = "Get all users -> ", description = "(It is accessible for all users)")
+    @GetMapping(RestConstant.BASE_OPEN_APIS + "user/all")
     public HttpEntity<?> getAll() {
         ApiResponse apiResponse = userService.getAll();
         return ResponseEntity.ok(apiResponse);

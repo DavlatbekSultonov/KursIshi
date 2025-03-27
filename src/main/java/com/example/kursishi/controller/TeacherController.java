@@ -7,6 +7,7 @@ import com.example.kursishi.common.RestConstant;
 import com.example.kursishi.request.TeacherReqDto;
 import com.example.kursishi.role.RolName;
 import com.example.kursishi.service.TeacherService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ public class TeacherController {
      * @param teacherReqDto - O‘qituvchi ma’lumotlari
      * @return ApiResponse - Yangi o‘qituvchi
      */
+    @Tag(name = "Creating teacher -> ", description = "(It is accessible for admin)")
     @CheckRole({RolName.ADMIN})
     @PostMapping(RestConstant.BASE_SECURE_PATH + "create/Teacher")
     public ResponseEntity<ApiResponse> createTeacher(@RequestBody TeacherReqDto teacherReqDto) {
@@ -37,10 +39,10 @@ public class TeacherController {
      * @param teacherReqDto - Yangilanishi kerak bo‘lgan ma’lumotlar
      * @return ApiResponse - Yangilangan o‘qituvchi
      */
-
+    @Tag(name = "Updating teacher details -> ", description = "(It is accessible for admin)")
     @CheckRole({RolName.ADMIN})
     @PostMapping(RestConstant.BASE_SECURE_PATH + "update/Teacher/{id}")
-    public ResponseEntity<ApiResponse> updateTeacher(@PathVariable Long id, @RequestBody TeacherReqDto teacherReqDto) {
+    public ResponseEntity<ApiResponse> updateTeacher(@PathVariable("id") Long id, @RequestBody TeacherReqDto teacherReqDto) {
         ApiResponse response = teacherService.update(id, teacherReqDto);
         return ResponseEntity.ok(response);
     }
@@ -50,8 +52,9 @@ public class TeacherController {
      * @param id - O‘qituvchining ID'si
      * @return ApiResponse - O‘qituvchi ma’lumotlari
      */
+    @Tag(name = "Get teacher to show teachers -> ", description = "(It is accessible for all users)")
     @GetMapping(RestConstant.BASE_OPEN_APIS+"{id}")
-    public ResponseEntity<ApiResponse> getTeacherById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> getTeacherById(@PathVariable("id") Long id) {
         ApiResponse response = teacherService.getId(id);
         return ResponseEntity.ok(response);
     }
@@ -60,6 +63,7 @@ public class TeacherController {
      * Barcha o‘qituvchilarni olish
      * @return ApiResponse - O‘qituvchilar ro‘yxati
      */
+    @Tag(name = "Get all teachers -> ", description = "(It is accessible for all users)")
     @GetMapping(RestConstant.BASE_OPEN_APIS)
     public ResponseEntity<ApiResponse> getAllTeachers() {
         ApiResponse response = teacherService.getAll();
@@ -72,9 +76,10 @@ public class TeacherController {
      * @return ApiResponse - O‘chirilgan o‘qituvchi
      */
 
+    @Tag(name = "deleting teachers -> ", description = "(It is accessible for admin)")
     @CheckRole({RolName.ADMIN})
     @DeleteMapping(RestConstant.BASE_SECURE_PATH+"delete/Teacher/{id}")
-    public ResponseEntity<ApiResponse> deleteTeacher(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> deleteTeacher(@PathVariable("id") Long id) {
         ApiResponse response = teacherService.delete(id);
         return ResponseEntity.ok(response);
     }
