@@ -5,6 +5,7 @@ import com.example.kursishi.config.JWTFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,6 +29,9 @@ public class SecurityConfig {
          http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
+                                .requestMatchers(HttpMethod.POST, "/api/v1/user/create").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.PUT, "/api/v1/user/update/**").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/v1/user/delete/**").hasRole("ADMIN")
                                 .requestMatchers(
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
