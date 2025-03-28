@@ -19,18 +19,18 @@ public class PartnersMapper {
         partners.setName(partnersReqDto.name());
         partners.setDescription(partnersReqDto.description());
         partners.setImageUrl(partnersReqDto.imageUrl());
-
+        partners.setPartnerLink(partnersReqDto.partnerLink());
     }
 
     public PartnersResDto toPartnersRes(Partners partners )
     {
-        System.out.println("partners.getDescription() = " + partners.getDescription());
         return new PartnersResDto
                 (
                         partners.getId(),
                         partners.getName(),
                         partners.getDescription(),
-                        partners.getImageUrl()
+                        partners.getImageUrl(),
+                        partners.getPartnerLink()
                 );
     }
 }
