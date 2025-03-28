@@ -14,23 +14,21 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PartnersMapper {
 
-    private final AttachmentRepository attachmentRepository;
 
     public void toPartners(PartnersReqDto partnersReqDto, Partners partners){
-
-        partners.setNomi(partnersReqDto.name());
+        partners.setName(partnersReqDto.name());
         partners.setDescription(partnersReqDto.description());
-
         partners.setImageUrl(partnersReqDto.imageUrl());
 
     }
 
     public PartnersResDto toPartnersRes(Partners partners )
     {
+        System.out.println("partners.getDescription() = " + partners.getDescription());
         return new PartnersResDto
                 (
                         partners.getId(),
-                        partners.getNomi(),
+                        partners.getName(),
                         partners.getDescription(),
                         partners.getImageUrl()
                 );

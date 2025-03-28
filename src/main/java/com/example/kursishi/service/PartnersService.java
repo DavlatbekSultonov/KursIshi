@@ -21,7 +21,6 @@ public class PartnersService {
     public ApiResponse create(PartnersReqDto partnersReqDto){
         Partners partners = new Partners();
         partnersMapper.toPartners(partnersReqDto,partners);
-
         partnersRepository.save(partners);
 
         PartnersResDto partnersRes = partnersMapper.toPartnersRes(partners);
@@ -57,7 +56,7 @@ public class PartnersService {
         Partners partners = partnersRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("partner not found / delete"));
         partnersRepository.delete(partners);
 
-        return ApiResponse.builder().status(true).message("Deleted successfully").build();
+        return ApiResponse.builder().status(true).message("Deleted successfully").data(partners).build();
     }
 
 

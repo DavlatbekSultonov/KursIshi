@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class PartnerController {
     @CheckRole({RolName.ADMIN})
     @PostMapping(RestConstant.BASE_SECURE_PATH+"create/partner")
     @Operation(summary = "Yangi hamkor yaratish->", description = "(Bu API faqat administrator tomonidan ishlatilishi mumkin.)")
-    public ResponseEntity<ApiResponse> create(@RequestBody PartnersReqDto partnersReqDto){
+    public ResponseEntity<ApiResponse> create(@org.springframework.web.bind.annotation.RequestBody PartnersReqDto partnersReqDto){
         ApiResponse apiResponse = partnersService.create(partnersReqDto);
         return ResponseEntity.ok(apiResponse);
     }
@@ -31,7 +32,7 @@ public class PartnerController {
     @CheckRole({RolName.ADMIN})
     @PutMapping(RestConstant.BASE_SECURE_PATH+"update/partner/{id}")
     @Operation(summary = "Hamkor ma’lumotlarini yangilash->", description = "(Administrator mavjud hamkor ma’lumotlarini yangilashi mumkin.)")
-    public ResponseEntity<ApiResponse> update(@PathVariable("id") Long id, @RequestBody PartnersReqDto partnersReqDto){
+    public ResponseEntity<ApiResponse> update(@PathVariable("id") Long id, @org.springframework.web.bind.annotation.RequestBody  PartnersReqDto partnersReqDto){
         ApiResponse update = partnersService.update(id, partnersReqDto);
         return ResponseEntity.ok(update);
     }

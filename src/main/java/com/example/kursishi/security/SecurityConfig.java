@@ -33,9 +33,6 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS faollashtirish
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // JWT uchun STATELESS sessiya
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/v1/user/create").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/user/update/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/user/delete/**").hasRole("ADMIN")
                         .requestMatchers(
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",

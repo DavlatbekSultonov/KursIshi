@@ -1,25 +1,26 @@
 package com.example.kursishi.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-@Entity
-@Table(name = "hamkorlar")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Data
+@Table(name = "partner")
+@Entity
 public class Partners {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomi;
+    @Column(nullable = false)
+    private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
     private String imageUrl;
 }
