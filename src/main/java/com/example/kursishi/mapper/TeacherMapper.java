@@ -25,7 +25,7 @@ public class TeacherMapper {
         teacher.setDescription(reqDto.description());
         teacher.setTelegramLink(reqDto.telegramLink());
         teacher.setImageUrl(reqDto.imageUrl());
-
+        teacher.setPosition(reqDto.position());
         teacher.setCreatedAt(LocalDateTime.now());
         teacher.setLastUpdatedDate(LocalDateTime.now());
         teacher.setDeleted(false);
@@ -37,10 +37,11 @@ public class TeacherMapper {
                 teacher.getName(),
                 teacher.getSurname(),
                 teacher.getPhoneNumber(),
+                teacher.getPosition(),
                 teacher.getTelegramLink(),
                 teacher.getArticleLink(),
                 teacher.getDescription(),
-                getImageUrl(teacher)
+                teacher.getImageUrl()
 
         );
     }

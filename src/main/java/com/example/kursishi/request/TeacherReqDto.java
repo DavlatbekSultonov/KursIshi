@@ -6,7 +6,7 @@ public record TeacherReqDto
                  String surname,
                  String phoneNumber,
                  String telegramLink,
-
+                 String position,
                  String articleLink,
 
                  String description,

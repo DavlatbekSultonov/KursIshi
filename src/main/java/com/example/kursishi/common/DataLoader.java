@@ -51,11 +51,14 @@ public class DataLoader implements CommandLineRunner{
 
 
         About about = new About();
-         about.setName("TATU Multimedia Kafedrasi");
-              about.setDescription("TATU Multimedia Kafedrasi axborot texnologiyalari va multimedia tizimlari bo'yicha ilg‘or ta'lim va tadqiqot markazidir.");
+         about.setName("Muhammad al-Xorazmiy nomidagi Toshkent Axborot Texnologiyalari Universiteti Multimedia Texnalogiyalari Kafedrasi");
+              about.setDescription("TATU Multimedia Kafedrasi axborot texnologiyalari va multimedia tizimlari bo'yicha" +
+                      " ilg‘or ta'lim va tadqiqot markazidir.");
                 about.setPhoneNumber("+998712034444");
                 about.setImageUrl("https://i.ibb.co/MDjY84Fw/photo-2025-03-06-19-42-19.jpg");
                 about.setTelegram("https://t.me/tuituz_official");
+                about.setInstagram("https://www.instagram.com/accounts/login/?next=%2Ftuit.official%2F");
+                about.setYoutube("https://www.youtube.com/channel/UC0aN4MLNCjMAyvUOgGXzBSA");
                 about.setId(123L);
                 aboutRepository.save(about);
     }

@@ -21,6 +21,8 @@ public class AboutMapper {
         about.setName(aboutReqDto.name());
         about.setPhoneNumber(aboutReqDto.phoneNumber());
         about.setImageUrl(aboutReqDto.imageUrl());
+        about.setInstagram(aboutReqDto.instagram());
+        about.setYoutube(aboutReqDto.youtube());
     }
 
     public AboutResDto toResponse(About about){
@@ -29,7 +31,9 @@ public class AboutMapper {
                 about.getDescription(),
                 about.getPhoneNumber(),
                 about.getTelegram(),
-                about.getImageUrl()
+                about.getImageUrl(),
+                about.getInstagram(),
+                about.getYoutube()
         );
     }
 

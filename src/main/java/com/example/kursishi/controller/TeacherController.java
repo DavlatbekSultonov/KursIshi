@@ -42,7 +42,7 @@ public class TeacherController {
      * @return ApiResponse - Yangilangan o‘qituvchi
      */
     @CheckRole({RolName.ADMIN})
-    @PostMapping(RestConstant.BASE_SECURE_PATH + "update/Teacher/{id}")
+    @PutMapping(RestConstant.BASE_SECURE_PATH + "update/Teacher/{id}")
     @Operation(summary = "O‘qituvchini yangilash->", description = "(Administrator mavjud o‘qituvchi ma’lumotlarini yangilashi mumkin.)")
     public ResponseEntity<ApiResponse> updateTeacher(@PathVariable("id") Long id, @RequestBody TeacherReqDto teacherReqDto) {
         ApiResponse response = teacherService.update(id, teacherReqDto);

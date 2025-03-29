@@ -8,6 +8,8 @@ public record AboutReqDto(
     String description,
     @NotNull String phoneNumber,
     @NotNull String telegramBot,
-    @NotNull String imageUrl
+    @NotNull String imageUrl,
+    @NotNull String instagram,
+    @NotNull String youtube
 ){
 }
