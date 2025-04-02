@@ -3,6 +3,7 @@ package com.example.kursishi.request;
 import jakarta.validation.constraints.NotNull;
 
 public record AboutResDto (
+        Long id,
     String name,
     String description,
     String phoneNumber,

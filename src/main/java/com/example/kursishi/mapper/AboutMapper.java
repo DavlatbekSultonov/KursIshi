@@ -27,6 +27,7 @@ public class AboutMapper {
 
     public AboutResDto toResponse(About about){
         return new AboutResDto(
+                about.getId(),
                 about.getName(),
                 about.getDescription(),
                 about.getPhoneNumber(),
