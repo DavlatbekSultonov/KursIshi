@@ -55,7 +55,8 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:9292", // Lokal frontend
-                "http://tuit.teachers.com" // Internetdagi frontend domeni
+                "http://tuit.teachers.com", // Internetdagi frontend domeni
+                "https://m-a-t.vercel.app"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
