@@ -42,7 +42,7 @@ public class NewsController {
     @CheckRole({RolName.ADMIN})
     @PutMapping(RestConstant.BASE_SECURE_PATH + "update/News/{id}")
     @Operation(summary = "Yangilikni yangilash ->", description = "(Administrator mavjud yangilikni yangilashi mumkin.)")
-    public ResponseEntity<ApiResponse> updateNews(@PathVariable Long id, @RequestBody NewsReqDto newsReqDto) {
+    public ResponseEntity<ApiResponse> updateNews(@PathVariable("id") Long id, @RequestBody NewsReqDto newsReqDto) {
         ApiResponse response = newsService.update(newsReqDto, id);
         return ResponseEntity.ok(response);
     }
@@ -54,7 +54,7 @@ public class NewsController {
      */
     @GetMapping(RestConstant.BASE_OPEN_APIS + "news/{id}")
     @Operation(summary = "Yangilikni ID bo‘yicha olish ->", description = "(Har qanday foydalanuvchi ID bo‘yicha yangilikni ko‘rishi mumkin.)")
-    public ResponseEntity<ApiResponse> getNewsById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> getNewsById(@PathVariable("id") Long id) {
         ApiResponse response = newsService.getById(id);
         return ResponseEntity.ok(response);
     }
@@ -78,7 +78,7 @@ public class NewsController {
     @CheckRole({RolName.ADMIN})
     @DeleteMapping(RestConstant.BASE_SECURE_PATH + "delete/News/{id}")
     @Operation(summary = "Yangilikni o‘chirish ->", description = "(Faqat administrator yangilikni o‘chira oladi.)")
-    public ResponseEntity<ApiResponse> deleteNews(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> deleteNews(@PathVariable("id") Long id) {
         ApiResponse response = newsService.delete(id);
         return ResponseEntity.ok(response);
     }
